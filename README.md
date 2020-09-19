@@ -15,3 +15,9 @@ Utilizado o Observer para notificar a View quando o download terminar, também u
 
 ## SQLite
 Para armazenar o histórico de downloads utilizo o SQLite, o banco está no diretório do Executável dentro de uma pasta chamada: DataBase
+
+## Exception
+Foi Criada um tipo para elevar exceções. Também criei uma classe que gerencia as exceções de forma global e salva um log. 
+
+## FeedBack
+Estou aberto a alterações e melhorias caso seja preciso, abraços.
