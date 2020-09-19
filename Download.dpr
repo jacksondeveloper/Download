@@ -10,7 +10,8 @@ uses
   Download.Controller.IdHTTP in 'Controller\Download.Controller.IdHTTP.pas',
   Download.Model.Dados in 'Model\Download.Model.Dados.pas' {Dados: TDataModule},
   Download.View.Historico in 'View\Download.View.Historico.pas' {fmHistorico},
-  Download.Controller.Dados in 'Controller\Download.Controller.Dados.pas';
+  Download.Controller.Dados in 'Controller\Download.Controller.Dados.pas',
+  Download.Exception.TrataException in 'Exception\Download.Exception.TrataException.pas';
 
 {$R *.res}
 

@@ -24,16 +24,20 @@
     <Transaction>2020/09/18 20:46:39.000.833,C:\Users\Jackson\Desktop\Softplan2\Model\Download.Model.Dados.dfm=C:\Users\Jackson\Desktop\Softplan2\Unit1.dfm</Transaction>
     <Transaction>2020/09/18 20:46:39.000.833,C:\Users\Jackson\Desktop\Softplan2\Model\Download.Model.Dados.pas=C:\Users\Jackson\Desktop\Softplan2\Unit1.pas</Transaction>
     <Transaction>2020/09/19 11:51:23.922,=C:\Jackson\SoftPlan\Download\Unit1.pas</Transaction>
-    <Transaction>2020/09/19 11:51:37.766,C:\Jackson\SoftPlan\Download\View\Download.View.Historico.dfm=C:\Jackson\SoftPlan\Download\Unit1.dfm</Transaction>
     <Transaction>2020/09/19 11:51:37.766,C:\Jackson\SoftPlan\Download\View\Download.View.Historico.pas=C:\Jackson\SoftPlan\Download\Unit1.pas</Transaction>
+    <Transaction>2020/09/19 11:51:37.766,C:\Jackson\SoftPlan\Download\View\Download.View.Historico.dfm=C:\Jackson\SoftPlan\Download\Unit1.dfm</Transaction>
     <Transaction>2020/09/19 12:00:53.658,=C:\Jackson\SoftPlan\Download\Unit1.pas</Transaction>
     <Transaction>2020/09/19 12:01:05.669,C:\Jackson\SoftPlan\Download\Controller\Download.Controller.Dados.pas=C:\Jackson\SoftPlan\Download\Unit1.pas</Transaction>
+    <Transaction>2020/09/19 15:15:56.922,=C:\Jackson\SoftPlan\Download\Unit1.pas</Transaction>
+    <Transaction>2020/09/19 15:17:06.724,C:\Jackson\SoftPlan\Download\Exception\Download.Exception.TrataException.pas=C:\Jackson\SoftPlan\Download\Unit1.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="Controller"/>
     <File Path="Controller\Download.Controller.IdHTTP.pas"/>
     <File Path="Controller\Download.Controller.Interfaces.pas"/>
     <File Path="Controller\Download.Controller.Dados.pas"/>
+    <File Path="Exception"/>
+    <File Path="Exception\Download.Exception.TrataException.pas"/>
     <File Path="Model"/>
     <File Path="Model\Download.Model.Dados.pas"/>
     <File Path="Model\Download.Model.Dados.dfm"/>

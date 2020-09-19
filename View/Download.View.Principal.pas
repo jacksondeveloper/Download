@@ -20,7 +20,8 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Imaging.pngimage,
   Vcl.Buttons, Vcl.FileCtrl, Download.Controller.Interfaces,
-  Download.Download.Tipos, Download.Controller.IdHTTP;
+  Download.Download.Tipos, Download.Controller.IdHTTP,
+  Download.Exception.TrataException;
 
 type
   TPrincipal = class(TForm, iDownloadObserver)
