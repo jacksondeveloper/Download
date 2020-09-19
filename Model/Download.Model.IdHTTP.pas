@@ -78,7 +78,10 @@ end;
 
 function TModelIdHTTP.EstaExecutando: Boolean;
 begin
-  result := (FTask.Status = TTaskStatus.Running);
+  Result := False;
+
+  if Assigned(FTask) then
+    result := (FTask.Status = TTaskStatus.Running);
 end;
 
 procedure TModelIdHTTP.AdicionarObserver(Observer: iDownloadObserver);
