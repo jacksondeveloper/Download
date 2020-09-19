@@ -106,9 +106,9 @@ object Principal: TPrincipal
         TabOrder = 0
         object pbProgresso: TProgressBar
           Left = 0
-          Top = 99
+          Top = 100
           Width = 663
-          Height = 13
+          Height = 12
           Align = alClient
           TabOrder = 0
           Visible = False
@@ -118,7 +118,7 @@ object Principal: TPrincipal
           Left = 3
           Top = 7
           Width = 117
-          Height = 92
+          Height = 93
           Margins.Top = 7
           Margins.Bottom = 0
           Align = alClient
@@ -2618,21 +2618,24 @@ object Principal: TPrincipal
           Left = 123
           Top = 0
           Width = 540
-          Height = 99
+          Height = 100
           Align = alClient
           BevelOuter = bvNone
           ColumnCollection = <
             item
-              Value = 100.000000000000000000
+              Value = 3.081992634231440000
+            end
+            item
+              Value = 96.918007365768560000
             end>
           ControlCollection = <
             item
-              Column = 0
+              Column = 1
               Control = lbPercentual
               Row = 1
             end
             item
-              Column = 0
+              Column = 1
               Control = lbKiloBytes
               Row = 2
             end>
@@ -2651,12 +2654,11 @@ object Principal: TPrincipal
             end>
           TabOrder = 1
           object lbPercentual: TLabel
-            Left = 0
-            Top = 24
-            Width = 540
-            Height = 24
+            Left = 16
+            Top = 25
+            Width = 524
+            Height = 25
             Align = alClient
-            Alignment = taCenter
             Caption = '0 %'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
@@ -2667,15 +2669,14 @@ object Principal: TPrincipal
             Layout = tlCenter
             Visible = False
             ExplicitLeft = 3
-            ExplicitTop = 0
+            ExplicitWidth = 89
           end
           object lbKiloBytes: TLabel
-            Left = 0
-            Top = 48
-            Width = 540
-            Height = 24
+            Left = 16
+            Top = 50
+            Width = 524
+            Height = 25
             Align = alClient
-            Alignment = taCenter
             Caption = '0 Kb'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
@@ -2686,7 +2687,7 @@ object Principal: TPrincipal
             Layout = tlCenter
             Visible = False
             ExplicitLeft = 3
-            ExplicitTop = 30
+            ExplicitWidth = 89
           end
         end
       end
@@ -2776,9 +2777,8 @@ object Principal: TPrincipal
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitLeft = 3
-          ExplicitTop = 6
-          ExplicitWidth = 594
+          ExplicitWidth = 33
+          ExplicitHeight = 23
         end
         object edURL: TEdit
           Left = 1
@@ -2790,14 +2790,13 @@ object Principal: TPrincipal
           BevelOuter = bvNone
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -24
+          Font.Height = -21
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
           TabOrder = 0
           Text = 'http://speedtest.tele2.net/10MB.zip'
-          ExplicitTop = 38
-          ExplicitHeight = 49
+          ExplicitHeight = 33
         end
         object Label2: TLabel
           AlignWithMargins = True
@@ -2817,7 +2816,6 @@ object Principal: TPrincipal
           ParentColor = False
           ParentFont = False
           Layout = tlCenter
-          ExplicitLeft = 4
           ExplicitWidth = 62
           ExplicitHeight = 23
         end
@@ -2831,14 +2829,13 @@ object Principal: TPrincipal
           BevelOuter = bvNone
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -24
+          Font.Height = -21
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
           TabOrder = 1
           Text = 'C:\Users\Jackson\Desktop\Arquivo.zip'
-          ExplicitTop = 118
-          ExplicitHeight = 37
+          ExplicitHeight = 33
         end
         object sbSelecionarDiretorio: TSpeedButton
           Tag = 3
@@ -2959,8 +2956,6 @@ object Principal: TPrincipal
             Value = 100.000000000000000000
           end>
         TabOrder = 0
-        ExplicitLeft = -1
-        ExplicitTop = 6
         object btIniciar: TButton
           AlignWithMargins = True
           Left = 334
@@ -2971,7 +2966,7 @@ object Principal: TPrincipal
           Caption = 'Iniciar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlue
-          Font.Height = -24
+          Font.Height = -21
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
@@ -2989,7 +2984,7 @@ object Principal: TPrincipal
           Enabled = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlue
-          Font.Height = -24
+          Font.Height = -21
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
@@ -3038,8 +3033,6 @@ object Principal: TPrincipal
               Value = 31.525324174216240000
             end>
           TabOrder = 2
-          ExplicitLeft = -2
-          ExplicitTop = 6
           object Image1: TImage
             AlignWithMargins = True
             Left = 4
@@ -5641,8 +5634,7 @@ object Principal: TPrincipal
             ParentFont = False
             Layout = tlCenter
             OnClick = Image1Click
-            ExplicitLeft = 2
-            ExplicitTop = 42
+            ExplicitWidth = 54
           end
         end
       end

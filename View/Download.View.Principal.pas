@@ -64,6 +64,7 @@ type
     procedure FinalizarComErro(ResultadoDownload: TResultadoDownload);
     procedure FinalizadoPeloUsuario(ResultadoDownload: TResultadoDownload);
     procedure HabilitarBotoes(btnIniciar: Boolean);
+    procedure ConferirExtensaoDownload;
   public
     { Public declarations }
     procedure Atualizar(ResultadoDownload: TResultadoDownload);
@@ -173,9 +174,15 @@ end;
 
 procedure TPrincipal.btIniciarClick(Sender: TObject);
 begin
+  ConferirExtensaoDownload;
   btIniciar.Enabled := False;
   pbProgresso.Visible := True;
   ControllerIdHTTP.FazerDownloadDoArquivo(edURL.Text, edDestino.Text);
+end;
+
+procedure TPrincipal.ConferirExtensaoDownload;
+begin
+  edDestino.Text := ChangeFileExt(edDestino.Text, ExtractFileExt(edURL.Text));
 end;
 
 procedure TPrincipal.btPararClick(Sender: TObject);

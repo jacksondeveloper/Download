@@ -6,8 +6,9 @@ uses
   Download.Model.Interfaces, IdBaseComponent, IdComponent,
   IdTCPConnection, IdTCPClient, IdHTTP, System.Threading,
   Download.Download.Tipos, Download.Controller.Interfaces,
-  System.Generics.Collections, IdAuthentication,
-  IdAntiFreezeBase, IdAntiFreeze, Download.Model.Dados;
+  System.Generics.Collections, IdAuthentication, IdAntiFreezeBase,
+  IdAntiFreeze, Download.Model.Dados, IdIOHandler, IdIOHandlerStack,
+  IdIOHandlerSocket, IdSSL, IdSSLOpenSSL;
 
 type
 
@@ -15,6 +16,7 @@ type
   private
     FIdDatabase: LongInt;
     FIdHTTP: TIdHTTP;
+    FIdSSHandler: TIdSSLIOHandlerSocketOpenSSL;
     FDatabase: TDados;
     FTask: iTask;
     IdAntiFreeze: TIdAntiFreeze;
@@ -51,7 +53,12 @@ uses
 
 constructor TModelIdHTTP.Create;
 begin
-  FIdHTTP             := TIdHTTP.Create(nil);
+
+  FIdHTTP                        := TIdHTTP.Create(nil);
+  FIdSSHandler                   := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+  FIdSSHandler.SSLOptions.Method := sslvSSLv23;
+  FIdHTTP.IOHandler              := FIdSSHandler;
+
   FIdHTTP.OnWork      := FIdHTTPWork;
   FIdHTTP.OnWorkBegin := FIdHTTPWorkBegin;
   FIdHTTP.OnWorkEnd   := FIdHTTPWorkEnd;
@@ -70,6 +77,7 @@ end;
 destructor TModelIdHTTP.Destroy;
 begin
   FreeAndNil(FObservers);
+  FreeAndNil(FIdSSHandler);
   FreeAndNil(FIdHTTP);
   FreeAndNil(IdAntiFreeze);
   FreeAndNil(FDatabase);
