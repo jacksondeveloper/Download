@@ -1,0 +1,49 @@
+unit Download.Controller.IdHTTP;
+
+interface
+
+uses
+  Download.Controller.Tipos, Download.Controller.Interfaces,
+  Download.Model.Interfaces;
+
+type
+
+  TControllerIdHTTP = class(TInterfacedObject, iControllerIdHTTP)
+    private
+      FModelIdHTTP: iModelIdHTTP;
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New: iControllerIdHTTP;
+      procedure FazerDownloadDoArquivo(strUrl, strDestino: String);
+  end;
+
+implementation
+
+{ TControllerIdHTTP }
+
+constructor TControllerIdHTTP.Create;
+begin
+  FModelIdHTTP := TModelIdHTTP.New;
+end;
+
+destructor TControllerIdHTTP.Destroy;
+begin
+  inherited;
+end;
+
+procedure TControllerIdHTTP.FazerDownloadDoArquivo(strUrl, strDestino: String);
+begin
+
+end;
+
+class function TControllerIdHTTP.New: iControllerIdHTTP;
+begin
+   result := Self.Create;
+end;
+
+end.
+
+implementation
+
+end.

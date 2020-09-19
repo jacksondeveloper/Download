@@ -1,0 +1,13 @@
+unit Download.Model.Tipos;
+
+interface
+
+type
+
+  ResultDownload = record
+
+  end;
+
+implementation
+
+end.

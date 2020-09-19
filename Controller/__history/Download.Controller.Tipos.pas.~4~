@@ -1,0 +1,19 @@
+unit Download.Controller.Tipos;
+
+interface
+
+uses
+  System.SysUtils;
+
+type
+
+  EDownloadException = class(Exception);
+
+  TResultadoDownload = record
+    WorkOut: Int64;
+    FinalizandoComSucesso: Boolean;
+  end;
+
+implementation
+
+end.

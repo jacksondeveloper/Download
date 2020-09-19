@@ -1,0 +1,16 @@
+unit Download.Controller.Interfaces;
+
+interface
+
+uses Download.Model.Tipos;
+
+type
+
+  iDownloadObserver = interface
+    ['{082A61DA-2489-4FD3-876B-1514AEADB6BE}']
+    procedure Atualizar(ResultadoDownload: TResultadoDownload);
+  end;
+
+implementation
+
+end.

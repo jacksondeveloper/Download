@@ -1,0 +1,13 @@
+unit Download.Model.Tipos;
+
+interface
+
+type
+
+  ResultadoDownload = record
+    FinalizandoComSucesso: Boolean;
+  end;
+
+implementation
+
+end.

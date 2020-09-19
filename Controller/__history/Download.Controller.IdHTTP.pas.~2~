@@ -1,0 +1,41 @@
+unit Download.Controller.IdHTTP;
+
+interface
+
+uses
+  Download.Controller.Tipos;
+
+type
+
+  TControllerIdHTTP = class(TInterfacedObject, iControllerIdHTTP)
+    private
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New: iControllerIdHTTP;
+  end;
+
+implementation
+
+{ TControllerIdHTTP }
+
+constructor TControllerIdHTTP.Create;
+begin
+
+end;
+
+destructor TControllerIdHTTP.Destroy;
+begin
+  inherited;
+end;
+
+class function TControllerIdHTTP.New: iControllerIdHTTP;
+begin
+   result := Self.Create;
+end;
+
+end.
+
+implementation
+
+end.

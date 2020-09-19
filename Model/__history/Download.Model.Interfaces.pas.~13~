@@ -1,0 +1,24 @@
+unit Download.Model.Interfaces;
+
+interface
+
+uses Download.Controller.Interfaces;
+
+type
+
+  iModelIdHTTP = interface
+    ['{5C07E1EE-355C-4C30-BD9A-249D7C7F4F50}']
+    procedure FazerDownloadDoArquivo(strUrl, strDestino: String);
+    procedure PararDownload;
+    function RetornarOBserver: iDownloadSubjet;
+  end;
+
+  iModelDatabase = interface
+    ['{59515020-0999-4E3B-9540-95352247559E}']
+    function SalvarInicio(DataInicio: TDateTime): LongInt;
+    function SalvarFim(DataFim: TDateTime);
+  end;
+
+implementation
+
+end.

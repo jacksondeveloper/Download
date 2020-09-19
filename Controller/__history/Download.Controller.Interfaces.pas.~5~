@@ -1,0 +1,21 @@
+unit Download.Controller.Interfaces;
+
+interface
+
+uses Download.Controller.Tipos;
+
+type
+
+  iDownloadController = interface
+    ['{644AE485-0761-4EE7-8B13-CA82C6D44288}']
+    procedure FazerDownloadDoArquivo(strUrl, strDestino: String);
+  end;
+
+  iDownloadObserver = interface
+    ['{082A61DA-2489-4FD3-876B-1514AEADB6BE}']
+    procedure Atualizar(ResultadoDownload: TResultadoDownload);
+  end;
+
+implementation
+
+end.

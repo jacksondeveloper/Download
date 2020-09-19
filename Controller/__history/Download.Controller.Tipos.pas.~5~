@@ -1,0 +1,21 @@
+unit Download.Controller.Tipos;
+
+interface
+
+uses
+  System.SysUtils;
+
+type
+
+  EDownloadException = class(Exception);
+
+  TStatus = (stFinalizadoComSucesso, stFinalizadoComErro);
+
+  TResultadoDownload = record
+    WorkOut: Int64;
+    Status: TStatus;
+  end;
+
+implementation
+
+end.

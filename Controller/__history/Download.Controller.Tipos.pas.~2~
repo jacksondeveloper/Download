@@ -1,0 +1,14 @@
+unit Download.Controller.Tipos;
+
+interface
+
+type
+
+  TResultadoDownload = record
+    WorkOut: Int64;
+    FinalizandoComSucesso: Boolean;
+  end;
+
+implementation
+
+end.
