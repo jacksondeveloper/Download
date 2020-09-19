@@ -44,10 +44,15 @@ type
     lbKiloBytes: TLabel;
     sbSelecionarDiretorio: TSpeedButton;
     SaveDialog: TSaveDialog;
+    GridPanel5: TGridPanel;
+    Image1: TImage;
+    Label3: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btIniciarClick(Sender: TObject);
     procedure btPararClick(Sender: TObject);
     procedure sbSelecionarDiretorioClick(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     ControllerIdHTTP: iControllerIdHTTP;
@@ -70,6 +75,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses Download.View.Historico;
 
 { TForm1 }
 
@@ -108,6 +115,16 @@ procedure TPrincipal.HabilitarBotoes(btnIniciar: Boolean);
 begin
   btIniciar.Enabled := btnIniciar;
   btParar.Enabled := not btnIniciar;
+end;
+
+procedure TPrincipal.Image1Click(Sender: TObject);
+begin
+  Application.CreateForm(TfmHistorico, fmHistorico);
+  try
+    fmHistorico.ShowModal;
+  finally
+    FreeAndNil(fmHistorico);
+  end;
 end;
 
 procedure TPrincipal.ReiniciarControles;
@@ -155,6 +172,7 @@ end;
 
 procedure TPrincipal.btIniciarClick(Sender: TObject);
 begin
+  btIniciar.Enabled := False;
   pbProgresso.Visible := True;
   ControllerIdHTTP.FazerDownloadDoArquivo(edURL.Text, edDestino.Text);
 end;
@@ -164,6 +182,20 @@ var
   ResDownload: TResultadoDownload;
 begin
   ControllerIdHTTP.PararDownload;
+end;
+
+procedure TPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if ControllerIdHTTP.EstaExecutando then
+  begin
+    if Application.MessageBox('Existe um download em andamento, deseja interrompe-lo?',
+      'Atenção', MB_YESNO + MB_ICONQUESTION) = mrYes then
+    begin
+      btParar.Click;
+    end
+    else
+      Abort;
+  end;
 end;
 
 procedure TPrincipal.FormCreate(Sender: TObject);

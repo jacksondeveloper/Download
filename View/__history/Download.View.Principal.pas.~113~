@@ -1,0 +1,205 @@
+{******************************************************************}
+{      Projeto que faz o Download de um arquivo usando Thread      }
+{                                                                  }
+{ Esse projeto usa o padrão observer para que a thread notifique o }
+{ form principal sobre o status do download.                       }
+{                                                                  }
+{ Também usa mvc onde as camadas se conhecem via controller sem ter}
+{ acoplamento da view com o model na clausula uses.                }
+{                                                                  }
+{                                                                  }
+{     @Author Jackson Lima dos Santos - jackson21lima@gmail.com    }
+{******************************************************************}
+
+unit Download.View.Principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Imaging.pngimage,
+  Vcl.Buttons, Vcl.FileCtrl, Download.Controller.Interfaces,
+  Download.Download.Tipos, Download.Controller.IdHTTP;
+
+type
+  TPrincipal = class(TForm, iDownloadObserver)
+    gpFundo: TGridPanel;
+    pnTop: TPanel;
+    pnFundo: TPanel;
+    pnRodape: TPanel;
+    GridPanel1: TGridPanel;
+    Label1: TLabel;
+    edURL: TEdit;
+    Label2: TLabel;
+    edDestino: TEdit;
+    GridPanel2: TGridPanel;
+    btIniciar: TButton;
+    btParar: TButton;
+    GridPanel3: TGridPanel;
+    pbProgresso: TProgressBar;
+    imLogo: TImage;
+    GridPanel4: TGridPanel;
+    lbPercentual: TLabel;
+    lbKiloBytes: TLabel;
+    sbSelecionarDiretorio: TSpeedButton;
+    SaveDialog: TSaveDialog;
+    GridPanel5: TGridPanel;
+    Image1: TImage;
+    Label3: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure btIniciarClick(Sender: TObject);
+    procedure btPararClick(Sender: TObject);
+    procedure sbSelecionarDiretorioClick(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+  private
+    { Private declarations }
+    ControllerIdHTTP: iControllerIdHTTP;
+
+    procedure CarregarDadosNaTela(ResultadoDownload: TResultadoDownload);
+    procedure FinalizarComSucesso;
+    procedure ReiniciarControles;
+    procedure FinalizarComErro(ResultadoDownload: TResultadoDownload);
+    procedure FinalizadoPeloUsuario(ResultadoDownload: TResultadoDownload);
+    procedure HabilitarBotoes(btnIniciar: Boolean);
+  public
+    { Public declarations }
+    procedure Atualizar(ResultadoDownload: TResultadoDownload);
+    procedure WMGetMinMaxInfo(var MSG: TMessage); message WM_GetMinMaxInfo;
+  end;
+
+var
+  Principal: TPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses Download.View.Historico;
+
+{ TForm1 }
+
+{*********************************************************}
+{ Método do padrão observer que será chamado pelo subject }
+{*********************************************************}
+procedure TPrincipal.Atualizar(ResultadoDownload: TResultadoDownload);
+begin
+  case ResultadoDownload.Status of
+    stFinalizadoComSucesso: FinalizarComSucesso;
+    stFinalizado: FinalizarComErro(ResultadoDownload);
+    stEstaExecutando: CarregarDadosNaTela(ResultadoDownload);
+  end;
+end;
+
+procedure TPrincipal.FinalizarComSucesso;
+begin
+  ShowMessage('Processo Finalizado!');
+  HabilitarBotoes(True);
+end;
+
+procedure TPrincipal.FinalizarComErro(ResultadoDownload: TResultadoDownload);
+begin
+  ReiniciarControles;
+  ShowMessage('Processo Cancelado!' + sLineBreak + ResultadoDownload.MsgErro);
+end;
+
+procedure TPrincipal.FinalizadoPeloUsuario(ResultadoDownload: TResultadoDownload);
+begin
+  ReiniciarControles;
+  ShowMessage('Processo Cancelado Pelo Usuário!');
+  HabilitarBotoes(True);
+end;
+
+procedure TPrincipal.HabilitarBotoes(btnIniciar: Boolean);
+begin
+  btIniciar.Enabled := btnIniciar;
+  btParar.Enabled := not btnIniciar;
+end;
+
+procedure TPrincipal.Image1Click(Sender: TObject);
+begin
+  Application.CreateForm(TfmHistorico, fmHistorico);
+  try
+    fmHistorico.ShowModal;
+  finally
+    FreeAndNil(fmHistorico);
+  end;
+end;
+
+procedure TPrincipal.ReiniciarControles;
+begin
+  pbProgresso.Visible := False;
+  lbPercentual.Visible := False;
+  lbKiloBytes.Visible := False;
+
+  pbProgresso.Position := 0;
+  pbProgresso.Max := 0;
+  lbPercentual.Caption := '0 %';
+  lbKiloBytes.Caption := '0 Kb';
+
+  HabilitarBotoes(True);
+end;
+
+procedure TPrincipal.sbSelecionarDiretorioClick(Sender: TObject);
+var
+  selDir: string;
+begin
+  SaveDialog.Filter := 'Arquivos' + ExtractFileExt(edUrl.Text) + '|*' + ExtractFileExt(edUrl.Text);
+  SaveDialog.FileName := 'Arquivo';
+  if SaveDialog.Execute then
+  begin
+    edDestino.Text := SaveDialog.FileName + ExtractFileExt(edUrl.Text);
+  end;
+end;
+
+procedure TPrincipal.CarregarDadosNaTela(ResultadoDownload: TResultadoDownload);
+begin
+  if ResultadoDownload.Status = stEstaExecutando then
+    HabilitarBotoes(False);
+                              
+  lbPercentual.Caption := FormatFloat('0 %', ResultadoDownload.ProgressoPorcentagem);
+  lbKiloBytes.Caption := FormatFloat('0.000 KBs', ResultadoDownload.ProgressoKiloBytes);
+
+  pbProgresso.Visible := True;
+  lbPercentual.Visible := True;
+  lbKiloBytes.Visible := True;
+
+  pbProgresso.Max := ResultadoDownload.ProgressoMaximo;
+  pbProgresso.Position := ResultadoDownload.Progresso - 20;
+
+end;
+
+procedure TPrincipal.btIniciarClick(Sender: TObject);
+begin
+  btIniciar.Enabled := False;
+  pbProgresso.Visible := True;
+  ControllerIdHTTP.FazerDownloadDoArquivo(edURL.Text, edDestino.Text);
+end;
+
+procedure TPrincipal.btPararClick(Sender: TObject);
+var
+  ResDownload: TResultadoDownload;
+begin
+  ControllerIdHTTP.PararDownload;
+end;
+
+procedure TPrincipal.FormCreate(Sender: TObject);
+begin
+  ControllerIdHTTP := TControllerIdHTTP.New;
+  ControllerIdHTTP.AdicionarObserver(Self);
+end;
+
+{******************************************************}
+{ Define tamanhos minimos de altura e largura no form  }
+{******************************************************}
+procedure TPrincipal.WMGetMinMaxInfo(var MSG: TMessage);
+begin
+  inherited;
+  with PMinMaxInfo(MSG.lparam)^ do
+  begin
+    ptMinTRackSize.X := 650;
+    ptMinTRackSize.Y := 400;
+  end;
+end;
+
+end.

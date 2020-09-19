@@ -18,6 +18,7 @@ type
       procedure FazerDownloadDoArquivo(strUrl, strDestino: String);
       procedure PararDownload;
       procedure AdicionarObserver(Observer: iDownloadObserver);
+      function EstaExecutando: Boolean;
   end;
 
 implementation
@@ -37,6 +38,11 @@ end;
 destructor TControllerIdHTTP.Destroy;
 begin
   inherited;
+end;
+
+function TControllerIdHTTP.EstaExecutando: Boolean;
+begin
+  Result := FModelIdHTTP.EstaExecutando;
 end;
 
 procedure TControllerIdHTTP.FazerDownloadDoArquivo(strUrl, strDestino: String);

@@ -2,7 +2,7 @@ unit Download.Controller.Interfaces;
 
 interface
 
-uses Download.Download.Tipos;
+uses Download.Download.Tipos, Data.DB;
 
 type
 
@@ -13,6 +13,12 @@ type
     procedure FazerDownloadDoArquivo(strUrl, strDestino: String);
     procedure PararDownload;
     procedure AdicionarObserver(Observer: iDownloadObserver);
+    function EstaExecutando: Boolean;
+  end;
+
+  iControllerDados = interface
+    ['{9897BAA6-A2A8-4FE9-B40B-1BDE32BD138D}']
+    function RetornaHistorico: TDataSet;
   end;
 
   iDownloadObserver = interface

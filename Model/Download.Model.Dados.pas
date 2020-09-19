@@ -25,6 +25,7 @@ type
     { Public declarations }
     function SalvarInicio(Url: String; DataInicio: TDateTime): LongInt;
     procedure SalvarFim(Codigo: LongInt; DataFim: TDateTime);
+    function TodosOsDownloads: TDataSet;
   end;
 
 var
@@ -41,7 +42,8 @@ uses
 
 procedure TDados.DataModuleCreate(Sender: TObject);
 begin
-  FDConnection1.Params.Database := ExtractFilePath(Application.ExeName) + '\Database\Banco.db';
+  FDConnection1.Connected := False;
+  FDConnection1.Params.Database := ExtractFilePath(Application.ExeName) + 'Database\Banco.db';
   FDConnection1.Connected := True;
 end;
 
@@ -76,6 +78,15 @@ begin
   FDQuery1.SQL.Text := 'select MAX(CODIGO) CODIGO from LOGDOWNLOAD';
   FDQuery1.Open;
   Result := FDQuery1.FieldByName('CODIGO').AsLargeInt;
+end;
+
+function TDados.TodosOsDownloads: TDataSet;
+begin
+  FDQuery1.Close;
+  FDQuery1.SQL.Clear;
+  FDQuery1.Open('Select CODIGO, cast(URL as Character Varying(600)) URL, ' +
+    'DATAINICIO, DATAFIM from LOGDOWNLOAD order by DATAFIM DESC');
+  Result := FDQuery1;
 end;
 
 end.

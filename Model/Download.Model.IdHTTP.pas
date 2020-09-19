@@ -38,6 +38,7 @@ type
     procedure RemoverObserver(Observer: iDownloadObserver);
     procedure Notificar(ResultadoDownload: TResultadoDownload);
     function RetornarOBserver: iDownloadSubjet;
+    function EstaExecutando: Boolean;
   end;
 
 implementation
@@ -75,6 +76,11 @@ begin
   inherited;
 end;
 
+function TModelIdHTTP.EstaExecutando: Boolean;
+begin
+  result := (FTask.Status = TTaskStatus.Running);
+end;
+
 procedure TModelIdHTTP.AdicionarObserver(Observer: iDownloadObserver);
 begin
   FObservers.Add(Observer);
@@ -104,7 +110,6 @@ end;
 procedure TModelIdHTTP.FIdHTTPWorkBegin(ASender: TObject; AWorkMode: TWorkMode;
   AWorkCountMax: Int64);
 begin
-  FIdDatabase := FDatabase.SalvarInicio(FIdHTTP.URL.URI, Now);
   FDownloadNotificacao.Status := stEstaExecutando;
   FDownloadNotificacao.ProgressoMaximo := AWorkCountMax;
   Notificar(FDownloadNotificacao);
@@ -126,6 +131,8 @@ procedure TModelIdHTTP.FazerDownloadDoArquivo(strUrl, strDestino: String);
 begin
   if strUrl.IsEmpty or strDestino.isEmpty then
     raise EDownloadException.Create('Parâmetros vazios em TModelIdHTTP.FazerDownloadDoArquivo');
+
+  FIdDatabase := FDatabase.SalvarInicio(strUrl, Now);
 
   FTask := TTask.Create(
     procedure

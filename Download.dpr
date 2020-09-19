@@ -8,7 +8,9 @@ uses
   Download.Download.Tipos in 'Tipos\Download.Download.Tipos.pas',
   Download.Controller.Interfaces in 'Controller\Download.Controller.Interfaces.pas',
   Download.Controller.IdHTTP in 'Controller\Download.Controller.IdHTTP.pas',
-  Download.Model.Dados in 'Model\Download.Model.Dados.pas' {Dados: TDataModule};
+  Download.Model.Dados in 'Model\Download.Model.Dados.pas' {Dados: TDataModule},
+  Download.View.Historico in 'View\Download.View.Historico.pas' {fmHistorico},
+  Download.Controller.Dados in 'Controller\Download.Controller.Dados.pas';
 
 {$R *.res}
 

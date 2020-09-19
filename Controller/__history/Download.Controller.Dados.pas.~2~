@@ -1,0 +1,50 @@
+unit Download.Controller.Dados;
+
+interface
+
+uses
+  Download.Controller.Interfaces, FireDAC.Comp.Client, Download.Model.Dados;
+
+type
+
+  TControllerDados = class(TInterfacedObject, iControllerDados)
+    private
+      FModelDados: TDados;
+    public
+      constructor Create;
+      destructor Destroy; override;
+      class function New: iControllerDados;
+      function RetornaHistorico: TFDQuery;
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+{ TControllerDados }
+
+constructor TControllerDados.Create;
+begin
+  FModelDados := TDados.Create(nil);
+end;
+
+destructor TControllerDados.Destroy;
+begin
+  FreeAndNil(FModelDados);
+  inherited;
+end;
+
+class function TControllerDados.New: iControllerDados;
+begin
+   result := Self.Create;
+end;
+
+function TControllerDados.RetornaHistorico: TFDQuery;
+begin
+  result := 
+end;
+
+end.
+
+end.

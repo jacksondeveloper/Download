@@ -11,6 +11,7 @@ type
     procedure FazerDownloadDoArquivo(strUrl, strDestino: String);
     procedure PararDownload;
     function RetornarOBserver: iDownloadSubjet;
+    function EstaExecutando: Boolean;
   end;
 
 implementation
